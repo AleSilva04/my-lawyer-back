@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+// ACA DE SEGURO FALTA ALGUNA ANOTACIÓN PARA DECIRLE QUE ES UN SERVICIO
 public interface ClientService {
 
     //Opciones de lectura
