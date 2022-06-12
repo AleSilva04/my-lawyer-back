@@ -24,10 +24,13 @@ public class Lawyer extends AuditModel {
     @NotNull
     @NotBlank
     @Size(max = 100)
-    private String fullName;
+    private String firstName;
 
     @NotNull
     @NotBlank
+    @Size(max = 100)
+    private String lastName;
+
     @Size(max = 240)
     private String address;
 
@@ -45,4 +48,9 @@ public class Lawyer extends AuditModel {
     @NotBlank
     @Size(max = 240)
     private String image;
+
+    private Long specialtyNumber; //número de colegiatura, ¿qué anotaciones puede tener?
+
+    @Size(max = 240)
+    private String businessOfWork; //empresa donde trabajo, esto si es opcional
 }

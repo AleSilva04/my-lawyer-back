@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,22 +14,15 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "notifications")
-public class Notification extends AuditModel {
+@Table(name = "specialties")
+public class Specialty extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date date; //tiene alguna validación??
-
     @NotNull
     @NotBlank
     @Size(max = 240)
-    private String message;
-
-    //falta las relaciones
-    //clientId
-    //lawyerId
-    //con el atributo "createdAt" es suficiente?
+    private String name;
 }

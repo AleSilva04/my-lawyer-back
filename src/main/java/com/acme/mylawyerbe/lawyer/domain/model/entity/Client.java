@@ -24,10 +24,13 @@ public class Client extends AuditModel {
     @NotNull
     @NotBlank
     @Size(max = 100)
-    private String fullName;
+    private String firstName;
 
     @NotNull
     @NotBlank
+    @Size(max = 100)
+    private String lastName;
+
     @Size(max = 240)
     private String address;
 
