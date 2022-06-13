@@ -1,20 +1,13 @@
-package com.acme.mylawyerbe.lawyer.controller;
-
+package com.acme.mylawyerbe.lawyer.api;
 
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Lawyer;
 import com.acme.mylawyerbe.lawyer.domain.service.LawyerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-@Configuration
-@EnableJpaAuditing
-@RestController
-@RequestMapping("/lawyer")
 public class LawyerController {
     @Autowired
     LawyerService lawyerService;
@@ -61,5 +54,4 @@ public class LawyerController {
 
         return lawyerService.actualizarLawyer(newLawyer, idLawyer);
     }
-
 }
