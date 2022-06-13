@@ -9,12 +9,7 @@ import java.util.List;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    //Client findAllByFullName(String fullName); //esto debe de ser una lista o solo debe devolver un cliente?
-
-    //List<Client> findAllByAge(int age);
-
-    //Client findAllByEmail(String email);
-
+    //verificar que clases se necesita, buscar porqué?
     Client findByFirstName(String firstName); //encuentra el que tiene este nombre
 
     List<Client> findAllByAge(int age); //encuentra TODOS que tengan esta edad
