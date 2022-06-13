@@ -11,6 +11,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     List<Notification> findAllByDate(String Date);
 
+
     Notification findByIds(int idLawyer, int idClient);
 
 
