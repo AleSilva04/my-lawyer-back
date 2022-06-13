@@ -1,6 +1,7 @@
 package com.acme.mylawyerbe.lawyer.domain.model.entity;
 
 import com.acme.mylawyerbe.shared.domain.model.AuditModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "notifications")
-public class Notification extends AuditModel {
+public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,14 @@ public class Notification extends AuditModel {
     private String message;
 
     //falta las relaciones
+    //la clase donde se coloca la relación ya no extiende de Audit Model
+    // 1 cliente tiene muchas notificaciones
     //clientId
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnore
+    private Client client;
+
     //lawyerId
     //con el atributo "createdAt" es suficiente?
 }
