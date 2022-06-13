@@ -8,12 +8,13 @@ import com.acme.mylawyerbe.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.validation.Validator;
 import java.util.List;
 import java.util.Set;
-
+@Service
 public class NotificationServiceImpl implements NotificationService {
 
     private static final String ENTITY ="Notification";
@@ -48,12 +49,13 @@ public class NotificationServiceImpl implements NotificationService {
         if(!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        //Name Uniqueness validation
+        //Puede tener la misma fecha pero no con el mismo abogado //Revisar como acceder a la hora de Date
 
-        Notification notificationWithDate = notificationRepository.findAllByDate(notification.getDate());
-        if (notificationWithDate != null)
+        Notification notificationWithDate = notificationRepository.findByDate(notification.getDate());
+        Notification notificationWithLawyerID = notificationRepository.findByLawyerId(notification.getLawyerId());
+        if (notificationWithDate != null && notificationWithLawyerID != null)
             throw new ResourceValidationException(ENTITY,
-                    "An notification with the same date already exists");
+                    "An notification with the same date and lawyer already exists");
         return notificationRepository.save(notification);
     }
 
@@ -63,11 +65,13 @@ public class NotificationServiceImpl implements NotificationService {
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
 
-        Notification notificationWithDate = notificationRepository.findAllByDate(request.getDate());
+        Notification notificationWithDate = notificationRepository.findByDate(request.getDate());
+
+        //Puede tener la misma fecha pero no con el mismo abogado //No realizado
 
         if (notificationWithDate != null && !notificationWithDate.getId().equals(notificationId))
             throw  new ResourceValidationException(ENTITY,
-                    "An notification with the same date already exists");
+                    "An notification with the same date and lawyer already exists");
 
         return notificationRepository.findById(notificationId).map(notification ->
                         notificationRepository.save(notification.withDate(request.getDate())

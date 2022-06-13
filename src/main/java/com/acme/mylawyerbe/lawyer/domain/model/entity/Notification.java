@@ -22,6 +22,7 @@ public class Notification extends AuditModel {
 
     @NotNull
     @NotBlank
+    @Column(unique = true)
     private String date;
 
     private Long clientId;
