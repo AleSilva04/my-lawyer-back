@@ -23,4 +23,9 @@ public class MappingConfiguration {
     public SpecialtyMapper specialtyMapper(){
         return new SpecialtyMapper();
     }
+    
+    @Bean
+    public FavouriteLawyerMapper favouriteLawyerResource(){
+        return new FavouriteLawyerMapper();
+    }
 }
