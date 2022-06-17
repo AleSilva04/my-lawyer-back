@@ -1,4 +1,4 @@
-package com.acme.mylawyerbe.lawyer.api.resource;
+package com.acme.mylawyerbe.lawyer.resource;
 
 import lombok.Getter;
 import lombok.Setter;

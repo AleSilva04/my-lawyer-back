@@ -1,4 +1,4 @@
-package com.acme.mylawyerbe.lawyer.api.resource;
+package com.acme.mylawyerbe.lawyer.resource;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @With
 @NoArgsConstructor
 @AllArgsConstructor
-public class FavoriteLawyerResource {
+public class ContactResource {
 
     private Long id;
 

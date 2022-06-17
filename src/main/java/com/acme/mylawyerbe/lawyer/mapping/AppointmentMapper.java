@@ -1,8 +1,8 @@
 package com.acme.mylawyerbe.lawyer.mapping;
 
-import com.acme.mylawyerbe.lawyer.api.resource.AppointmentResource;
-import com.acme.mylawyerbe.lawyer.api.resource.CreateAppointmentResource;
-import com.acme.mylawyerbe.lawyer.api.resource.UpdateAppointmentResource;
+import com.acme.mylawyerbe.lawyer.resource.AppointmentResource;
+import com.acme.mylawyerbe.lawyer.resource.CreateAppointmentResource;
+import com.acme.mylawyerbe.lawyer.resource.UpdateAppointmentResource;
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Appointment;
 import com.acme.mylawyerbe.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

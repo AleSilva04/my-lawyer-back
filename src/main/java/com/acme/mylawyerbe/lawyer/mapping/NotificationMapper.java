@@ -1,8 +1,8 @@
 package com.acme.mylawyerbe.lawyer.mapping;
 
-import com.acme.mylawyerbe.lawyer.api.resource.CreateNotificationResource;
-import com.acme.mylawyerbe.lawyer.api.resource.NotificationResource;
-import com.acme.mylawyerbe.lawyer.api.resource.UpdateNotificationResource;
+import com.acme.mylawyerbe.lawyer.resource.CreateNotificationResource;
+import com.acme.mylawyerbe.lawyer.resource.NotificationResource;
+import com.acme.mylawyerbe.lawyer.resource.UpdateNotificationResource;
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Notification;
 import com.acme.mylawyerbe.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

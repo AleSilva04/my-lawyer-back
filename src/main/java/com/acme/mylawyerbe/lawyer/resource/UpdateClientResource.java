@@ -1,20 +1,20 @@
-package com.acme.mylawyerbe.lawyer.api.resource;
+package com.acme.mylawyerbe.lawyer.resource;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Setter
 @Getter
-@With
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateClientResource {
+@Setter
+public class UpdateClientResource {
 
-    //esta clase sirve para crear un nievo cliente
+    //qué es lo que necesito para actualizar
+    private Long id;
+
     @NotNull
     @NotBlank
     @Size(max = 100)

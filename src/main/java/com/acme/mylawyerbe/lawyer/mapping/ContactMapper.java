@@ -1,8 +1,8 @@
 package com.acme.mylawyerbe.lawyer.mapping;
 
-import com.acme.mylawyerbe.lawyer.api.resource.ContactResource;
-import com.acme.mylawyerbe.lawyer.api.resource.CreateContactResource;
-import com.acme.mylawyerbe.lawyer.api.resource.UpdateContactResource;
+import com.acme.mylawyerbe.lawyer.resource.ContactResource;
+import com.acme.mylawyerbe.lawyer.resource.CreateContactResource;
+import com.acme.mylawyerbe.lawyer.resource.UpdateContactResource;
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Contact;
 import com.acme.mylawyerbe.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.acme.mylawyerbe.lawyer.mapping;
 
-import com.acme.mylawyerbe.lawyer.api.resource.CreateFavoriteLawyerResource;
-import com.acme.mylawyerbe.lawyer.api.resource.FavoriteLawyerResource;
-import com.acme.mylawyerbe.lawyer.api.resource.UpdateFavoriteLawyerResource;
+import com.acme.mylawyerbe.lawyer.resource.CreateFavoriteLawyerResource;
+import com.acme.mylawyerbe.lawyer.resource.FavoriteLawyerResource;
+import com.acme.mylawyerbe.lawyer.resource.UpdateFavoriteLawyerResource;
 import com.acme.mylawyerbe.lawyer.domain.model.entity.FavoriteLawyer;
 import com.acme.mylawyerbe.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

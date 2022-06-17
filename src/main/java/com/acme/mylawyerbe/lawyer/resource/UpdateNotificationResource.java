@@ -1,6 +1,7 @@
-package com.acme.mylawyerbe.lawyer.api.resource;
+package com.acme.mylawyerbe.lawyer.resource;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,10 +10,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@With
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateNotificationResource {
+public class UpdateNotificationResource {
 
     private Date date;
 
@@ -20,4 +18,8 @@ public class CreateNotificationResource {
     @NotBlank
     @Size(max = 240)
     private String message;
+
+    private Long client_id;
+
+    //falta "private Long lawyer_id;"
 }
