@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class UpdateFavoriteLawyerResource {
 
-    private Long id;
+    private Long client_id;
 
-    //verificar porque no necesita nada
+    //falta "private Long lawyer_id;"
 }

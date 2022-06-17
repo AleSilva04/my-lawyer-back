@@ -5,6 +5,7 @@ import com.acme.mylawyerbe.lawyer.api.resource.CreateClientResource;
 import com.acme.mylawyerbe.lawyer.api.resource.UpdateClientResource;
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Client;
 import com.acme.mylawyerbe.shared.mapping.EnhancedModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class ClientMapper implements Serializable {
 
+    @Autowired
     EnhancedModelMapper mapper;
 
     //Mapeo de los objetos

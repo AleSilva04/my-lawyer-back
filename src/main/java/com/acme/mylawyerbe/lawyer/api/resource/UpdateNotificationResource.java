@@ -11,7 +11,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class UpdateNotificationResource {
-    private Long id;
 
     private Date date;
 
@@ -19,4 +18,8 @@ public class UpdateNotificationResource {
     @NotBlank
     @Size(max = 240)
     private String message;
+
+    private Long client_id;
+
+    //falta "private Long lawyer_id;"
 }

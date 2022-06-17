@@ -7,5 +7,7 @@ import lombok.Setter;
 @Setter
 public class UpdateContactResource {
 
-    private Long id;
+    private Long client_id;
+
+    //falta "private Long lawyer_id;"
 }

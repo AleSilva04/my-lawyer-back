@@ -9,7 +9,9 @@ import java.util.Date;
 @Setter
 public class UpdateAppointmentResource {
 
-    private Long id;
-
     private Date date;
+
+    private Long client_id;
+
+    //falta "private Long lawyer_id;"
 }
