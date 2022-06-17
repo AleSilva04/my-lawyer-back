@@ -17,6 +17,8 @@ public interface ClientService {
 
     Client getById(Long studentId);
 
+    Client getByName(String name);
+
     //Opciones de create, update, delete estas
     Client create(Client client);
 
