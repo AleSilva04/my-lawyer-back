@@ -15,9 +15,11 @@ public interface ClientService {
 
     Page<Client> getAll(Pageable pageable);
 
-    Client getById(Long studentId);
+    Client getById(Long clientId);
 
-    Client getByName(String name);
+    Client getByFirstName(String firstName);
+
+    Client getByLastName(String lastName);
 
     //Opciones de create, update, delete estas
     Client create(Client client);
