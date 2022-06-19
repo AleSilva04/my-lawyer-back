@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface NotificationService {
 
     //las entidades que tienen una relacion son distintas porque puedes buscarlos por ese atributo

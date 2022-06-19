@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 // ACA DE SEGURO FALTA ALGUNA ANOTACIÓN PARA DECIRLE QUE ES UN SERVICIO
-@Service
 public interface ClientService {
 
     //Opciones de lectura
