@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,6 +19,9 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    //atributo que le estoy poniendo de mas para que me deje utilizar el resource
+    private Date date;
 
     //falta las relaciones
     //la clase donde se coloca la relación ya no extiende de Audit Model

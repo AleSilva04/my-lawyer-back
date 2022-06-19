@@ -8,12 +8,14 @@ import com.acme.mylawyerbe.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class ClientServiceImpl implements ClientService {
 
     //crear el ENTITY
@@ -23,6 +25,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     //crear el validator
+
     private final Validator validator;
 
     //constructor
@@ -70,16 +73,43 @@ public class ClientServiceImpl implements ClientService {
         if (clientWithFirstName != null || clientWithLastName != null)
             throw new ResourceValidationException(ENTITY,
                     "An client with the same name already exists.");*/
+
+        //aca si le he puesto que el email sea unico
+        Client clientWithEmail = clientRepository.findByEmail(client.getEmail());
+        if (clientWithEmail != null)
+            throw new ResourceValidationException(ENTITY,
+                    "An client with the same email already exists.");
+
         return clientRepository.save(client);
     }
 
     @Override
     public Client update(Long clientId, Client request) {
-        return null;
+        Set<ConstraintViolation<Client>> violations = validator.validate(request);
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        Client clientWithEmail = clientRepository.findByEmail(request.getEmail());
+
+        if (clientWithEmail != null && !clientWithEmail.getId().equals(clientId))
+            throw new ResourceValidationException(ENTITY,
+                    "An client with the same email already exists.");
+
+        return clientRepository.findById(clientId).map(client ->
+                clientRepository.save(client
+                        .withFirstName(request.getFirstName())
+                        .withLastName(request.getLastName())
+                        .withAddress(request.getAddress())
+                        .withAge(request.getAge())
+                        .withEmail(request.getEmail())))
+                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, clientId));
     }
 
     @Override
     public ResponseEntity<?> delete(Long clientId) {
-        return null;
+        return clientRepository.findById(clientId).map(client -> {
+            clientRepository.delete(client);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, clientId));
     }
 }
