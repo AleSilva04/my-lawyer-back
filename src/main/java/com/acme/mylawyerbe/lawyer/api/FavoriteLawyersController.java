@@ -16,6 +16,7 @@ public class FavoriteLawyersController {
     //TODO: revisar que metodos necesita las controller que son relaciones
     //TODO: creo que se crea un controller por cada relacion
     //TODO: todas estas funciones tienen error porque no esta su service implementation
+    //TODO: DONDE VA LA ANOTACION @SERVICE
     private final FavoriteLawyerService favoriteLawyerService;
 
     private final FavoriteLawyerMapper mapper;

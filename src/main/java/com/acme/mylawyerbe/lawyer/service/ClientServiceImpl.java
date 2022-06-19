@@ -8,14 +8,12 @@ import com.acme.mylawyerbe.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
 import java.util.Set;
 
-@Service
 public class ClientServiceImpl implements ClientService {
 
     //crear el ENTITY

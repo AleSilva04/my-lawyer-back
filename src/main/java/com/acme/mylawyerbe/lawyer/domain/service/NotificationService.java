@@ -4,9 +4,11 @@ import com.acme.mylawyerbe.lawyer.domain.model.entity.Notification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface NotificationService {
 
     //las entidades que tienen una relacion son distintas porque puedes buscarlos por ese atributo
