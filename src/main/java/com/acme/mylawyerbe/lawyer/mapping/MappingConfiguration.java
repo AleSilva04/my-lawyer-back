@@ -30,4 +30,19 @@ public class MappingConfiguration {
     public NotificationMapper notificationMapper(){
         return new NotificationMapper();
     }
+
+    @Bean
+    public LawyerMapper lawyerMapper(){
+        return new LawyerMapper();
+    }
+
+    @Bean
+    public SpecialtyMapper specialtyMapper(){
+        return new SpecialtyMapper();
+    }
+
+    @Bean
+    public LawyerSpecialtyMapper lawyerSpecialtyMapper(){
+        return new LawyerSpecialtyMapper();
+    }
 }
