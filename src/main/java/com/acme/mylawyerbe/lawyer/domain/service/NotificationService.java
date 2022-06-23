@@ -18,7 +18,9 @@ public interface NotificationService {
 
     Page<Notification> getAllByClientId(Long clientId, Pageable pageable);
 
-    //falta por lawyerId
+    List<Notification> getAllByLawyerId(Long lawyerId);
+
+    Page<Notification> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
     Notification getById(Long notificationId);
 
@@ -26,12 +28,12 @@ public interface NotificationService {
 
     //crud
     //tambien se tiene que agregar el "Long lawyerId"
-    Notification create(Long clientId, Notification notification);
+    Notification create(Long lawyerId, Long clientId, Notification notification);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    Notification update(Long clientId, Long notificationId, Notification request);
+    Notification update(Long lawyerId, Long clientId, Long notificationId, Notification request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long clientId, Long notificationId);
+    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long notificationId);
 
 }

@@ -16,20 +16,20 @@ public interface FavoriteLawyerService {
 
     Page<FavoriteLawyer> getAllByClientId(Long clientId, Pageable pageable);
 
-    //falta por lawyerId
+    List<FavoriteLawyer> getAllByLawyerId(Long lawyerId);
+
+    Page<FavoriteLawyer> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
     FavoriteLawyer getById(Long favoriteLawyerId);
-
-    FavoriteLawyer getByName(String name);
 
     //crud
 
     //tambien se tiene que agregar el "Long lawyerId"
-    FavoriteLawyer create(Long clientId, FavoriteLawyer favoriteLawyer);
+    FavoriteLawyer create(Long lawyerId, Long clientId, FavoriteLawyer favoriteLawyer);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    FavoriteLawyer update(Long clientId, Long favoriteLawyerId, FavoriteLawyer request);
+    FavoriteLawyer update(Long lawyerId, Long clientId, Long favoriteLawyerId, FavoriteLawyer request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long clientId, Long favoriteLawyerId);
+    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long favoriteLawyerId);
 }

@@ -16,7 +16,9 @@ public interface ContactService {
 
     Page<Contact> getAllByClientId(Long clientId, Pageable pageable);
 
-    //falta por lawyerId
+    List<Contact> getAllByLawyerId(Long lawyerId);
+
+    Page<Contact> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
     Contact getById(Long contactId);
 
@@ -25,11 +27,11 @@ public interface ContactService {
     //crud
 
     //tambien se tiene que agregar el "Long lawyerId"
-    Contact create(Long clientId, Contact contact);
+    Contact create(Long lawyerId, Long clientId, Contact contact);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    Contact update(Long clientId, Long contactId, Contact request);
+    Contact update(Long lawyerId, Long clientId, Long contactId, Contact request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long clientId, Long contactId);
+    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long contactId);
 }

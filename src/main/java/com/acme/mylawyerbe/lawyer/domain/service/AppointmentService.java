@@ -17,6 +17,10 @@ public interface AppointmentService {
 
     Page<Appointment> getAllByClientId(Long clientId, Pageable pageable);
 
+    List<Appointment> getAllByLawyerId(Long lawyerId);
+
+    Page<Appointment> getAllByLawyerId(Long lawyerId, Pageable pageable);
+
     //falta por lawyerId
 
     Appointment getById(Long appointmentId);
@@ -26,11 +30,11 @@ public interface AppointmentService {
     //opciones crud
 
     //tambien se tiene que agregar el "Long lawyerId"
-    Appointment create(Long clientId, Appointment appointment);
+    Appointment create(Long lawyerId, Long clientId, Appointment appointment);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    Appointment update(Long clientId, Long appointmentId, Appointment request);
+    Appointment update(Long lawyerId, Long clientId, Long appointmentId, Appointment request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long clientId, Long appointmentId);
+    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long appointmentId);
 }
