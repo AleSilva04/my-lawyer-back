@@ -15,4 +15,8 @@ public interface LawyerSpecialtyRepository extends JpaRepository<LawyerSpecialty
 
     Page<LawyerSpecialty> findAllByLawyer_Id(Long lawyerId, Pageable pageable);
 
+    List<LawyerSpecialty> findAllBySpecialty_Id(Long specialtyId);
+
+    Page<LawyerSpecialty> findAllBySpecialty_Id(Long specialtyId, Pageable pageable);
+
 }

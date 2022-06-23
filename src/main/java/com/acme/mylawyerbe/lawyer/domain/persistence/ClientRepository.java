@@ -1,8 +1,6 @@
 package com.acme.mylawyerbe.lawyer.domain.persistence;
 
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Client;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
