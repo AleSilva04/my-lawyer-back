@@ -17,5 +17,5 @@ public class AppointmentResource {
 
     private ClientResource clientResource;
 
-    //Falta el private de lawyer
+    private LawyerResource lawyerResource;
 }

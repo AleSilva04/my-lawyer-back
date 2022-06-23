@@ -9,5 +9,5 @@ public class UpdateFavoriteLawyerResource {
 
     private Long client_id;
 
-    //falta "private Long lawyer_id;"
+    private Long lawyer_id;
 }

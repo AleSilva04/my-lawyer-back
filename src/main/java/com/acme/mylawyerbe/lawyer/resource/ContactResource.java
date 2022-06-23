@@ -13,5 +13,5 @@ public class ContactResource {
 
     private ClientResource clientResource;
 
-    //Falta el private de lawyer
+    private LawyerResource lawyerResource;
 }

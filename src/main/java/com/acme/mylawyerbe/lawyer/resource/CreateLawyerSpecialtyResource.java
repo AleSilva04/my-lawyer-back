@@ -1,5 +1,4 @@
 package com.acme.mylawyerbe.lawyer.resource;
-
 import lombok.*;
 
 import java.util.Date;
@@ -9,15 +8,8 @@ import java.util.Date;
 @With
 @NoArgsConstructor
 @AllArgsConstructor
-public class NotificationResource {
-
-    private Long id;
+public class CreateLawyerSpecialtyResource {
 
     private Date date;
 
-    private String message;
-
-    private ClientResource clientResource;
-
-    private LawyerResource lawyerResource;
 }

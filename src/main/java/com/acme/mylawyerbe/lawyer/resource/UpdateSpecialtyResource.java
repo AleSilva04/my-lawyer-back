@@ -1,25 +1,19 @@
 package com.acme.mylawyerbe.lawyer.resource;
-
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Getter
 @Setter
-public class UpdateNotificationResource {
+public class UpdateSpecialtyResource {
 
-    private Date date;
+    private Long id;
 
     @NotNull
     @NotBlank
-    @Size(max = 240)
-    private String message;
-
-    private Long client_id;
-
-    private Long lawyer_id;
+    @Size(max = 100)
+    private String name;
 }

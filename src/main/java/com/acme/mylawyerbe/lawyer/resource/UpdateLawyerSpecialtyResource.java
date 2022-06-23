@@ -5,9 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateContactResource {
-
-    private Long client_id;
+public class UpdateLawyerSpecialtyResource {
 
     private Long lawyer_id;
+
+    private Long specialty_id;
+
 }

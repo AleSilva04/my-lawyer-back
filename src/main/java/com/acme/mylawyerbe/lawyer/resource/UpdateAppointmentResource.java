@@ -13,5 +13,5 @@ public class UpdateAppointmentResource {
 
     private Long client_id;
 
-    //falta "private Long lawyer_id;"
+    private Long lawyer_id;
 }
