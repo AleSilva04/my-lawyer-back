@@ -23,7 +23,7 @@ public class AppointmentsController {
     }
 
     @GetMapping
-    public Page<AppointmentResource> getAllAppointment(Pageable pageable){
+    public Page<AppointmentResource> getAllAppointments(Pageable pageable){
         return mapper.modelListPage(appointmentService.getAll(), pageable);
     }
 

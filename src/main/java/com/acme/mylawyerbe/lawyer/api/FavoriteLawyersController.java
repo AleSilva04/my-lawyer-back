@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/favoriteLawyers")
 public class FavoriteLawyersController {
-    //TODO:revisar endpoints que esten correctamente escritos
-    //TODO: revisar que metodos necesita las controller que son relaciones
+    //TODO: revisar endpoints que esten correctamente escritos acorde al Frontend
+    //TODO: revisar que metodos necesita las controller que son relaciones (aunque ya vi la clase y solo es esto)
     //TODO: creo que se crea un controller por cada relacion
-    //TODO: todas estas funciones tienen error porque no esta su service implementation
-    //TODO: DONDE VA LA ANOTACION @SERVICE
+    //TODO: falta los service implementation de los domain que tiene relaciones
     private final FavoriteLawyerService favoriteLawyerService;
 
     private final FavoriteLawyerMapper mapper;
@@ -28,7 +27,7 @@ public class FavoriteLawyersController {
     }
 
     @GetMapping
-    public Page<FavoriteLawyerResource> getAllFavoriteLawyer(Pageable pageable){
+    public Page<FavoriteLawyerResource> getAllFavoriteLawyers(Pageable pageable){
         return mapper.modelListPage(favoriteLawyerService.getAll(), pageable);
     }
 }

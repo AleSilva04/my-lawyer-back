@@ -23,7 +23,7 @@ public class ContactsController {
     }
 
     @GetMapping
-    public Page<ContactResource> getAllContact(Pageable pageable){
+    public Page<ContactResource> getAllContacts(Pageable pageable){
         return mapper.modelListPage(contactService.getAll(), pageable);
     }
 }

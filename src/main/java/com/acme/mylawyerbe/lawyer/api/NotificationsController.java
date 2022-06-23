@@ -24,7 +24,7 @@ public class NotificationsController {
     }
 
     @GetMapping
-    public Page<NotificationResource> getAllNotification(Pageable pageable){
+    public Page<NotificationResource> getAllNotifications(Pageable pageable){
         return mapper.modelListPage(notificationService.getAll(), pageable);
     }
 }
