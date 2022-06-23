@@ -26,6 +26,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     //Aca las clases cambian un poco lo habra hecho en clase?
+
     @Override
     public List<Appointment> getAll() {
         return appointmentRepository.findAll();
@@ -42,6 +43,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> getAllByLawyerId(Long lawyerId) {
+        return null;
+    }
+
+    @Override
+    public Page<Appointment> getAllByLawyerId(Long lawyerId, Pageable pageable) {
+        return null;
+    }
+
+    @Override
     public Appointment getById(Long appointmentId) {
         return null;
     }
@@ -52,17 +63,18 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment create(Long clientId, Appointment appointment) {
+    public Appointment create(Long lawyerId, Long clientId, Appointment appointment) {
         return null;
     }
 
     @Override
-    public Appointment update(Long clientId, Long appointmentId, Appointment request) {
+    public Appointment update(Long lawyerId, Long clientId, Long appointmentId, Appointment request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(Long clientId, Long appointmentId) {
+    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long appointmentId) {
         return null;
     }
+
 }

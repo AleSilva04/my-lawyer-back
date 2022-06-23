@@ -25,9 +25,11 @@ public class FavoriteLawyerServiceImpl implements FavoriteLawyerService {
         this.validator = validator;
     }
 
+    //Aca las clases cambian un poco lo habra hecho en clase?
+
     @Override
     public List<FavoriteLawyer> getAll() {
-        return null;
+        return favoriteLawyerRepository.findAll();
     }
 
     @Override
@@ -41,27 +43,32 @@ public class FavoriteLawyerServiceImpl implements FavoriteLawyerService {
     }
 
     @Override
+    public List<FavoriteLawyer> getAllByLawyerId(Long lawyerId) {
+        return null;
+    }
+
+    @Override
+    public Page<FavoriteLawyer> getAllByLawyerId(Long lawyerId, Pageable pageable) {
+        return null;
+    }
+
+    @Override
     public FavoriteLawyer getById(Long favoriteLawyerId) {
         return null;
     }
 
     @Override
-    public FavoriteLawyer getByName(String name) {
+    public FavoriteLawyer create(Long lawyerId, Long clientId, FavoriteLawyer favoriteLawyer) {
         return null;
     }
 
     @Override
-    public FavoriteLawyer create(Long clientId, FavoriteLawyer favoriteLawyer) {
+    public FavoriteLawyer update(Long lawyerId, Long clientId, Long favoriteLawyerId, FavoriteLawyer request) {
         return null;
     }
 
     @Override
-    public FavoriteLawyer update(Long clientId, Long favoriteLawyerId, FavoriteLawyer request) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> delete(Long clientId, Long favoriteLawyerId) {
+    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long favoriteLawyerId) {
         return null;
     }
 }

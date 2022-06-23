@@ -25,9 +25,11 @@ public class ContactServiceImpl implements ContactService {
         this.validator = validator;
     }
 
+    //Aca las clases cambian un poco lo habra hecho en clase?
+
     @Override
     public List<Contact> getAll() {
-        return null;
+        return contactRepository.findAll();
     }
 
     @Override
@@ -37,6 +39,16 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Page<Contact> getAllByClientId(Long clientId, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public List<Contact> getAllByLawyerId(Long lawyerId) {
+        return null;
+    }
+
+    @Override
+    public Page<Contact> getAllByLawyerId(Long lawyerId, Pageable pageable) {
         return null;
     }
 
@@ -51,17 +63,18 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact create(Long clientId, Contact contact) {
+    public Contact create(Long lawyerId, Long clientId, Contact contact) {
         return null;
     }
 
     @Override
-    public Contact update(Long clientId, Long contactId, Contact request) {
+    public Contact update(Long lawyerId, Long clientId, Long contactId, Contact request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(Long clientId, Long contactId) {
+    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long contactId) {
         return null;
     }
+
 }

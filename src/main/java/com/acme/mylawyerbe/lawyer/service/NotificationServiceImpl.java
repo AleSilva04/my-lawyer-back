@@ -25,9 +25,11 @@ public class NotificationServiceImpl implements NotificationService {
         this.validator = validator;
     }
 
+    //Aca las clases cambian un poco lo habra hecho en clase?
+
     @Override
     public List<Notification> getAll() {
-        return null;
+        return notificationRepository.findAll();
     }
 
     @Override
@@ -37,6 +39,16 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public Page<Notification> getAllByClientId(Long clientId, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public List<Notification> getAllByLawyerId(Long lawyerId) {
+        return null;
+    }
+
+    @Override
+    public Page<Notification> getAllByLawyerId(Long lawyerId, Pageable pageable) {
         return null;
     }
 
@@ -51,17 +63,17 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Notification create(Long clientId, Notification notification) {
+    public Notification create(Long lawyerId, Long clientId, Notification notification) {
         return null;
     }
 
     @Override
-    public Notification update(Long clientId, Long notificationId, Notification request) {
+    public Notification update(Long lawyerId, Long clientId, Long notificationId, Notification request) {
         return null;
     }
 
     @Override
-    public ResponseEntity<?> delete(Long clientId, Long notificationId) {
+    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long notificationId) {
         return null;
     }
 }
