@@ -41,4 +41,8 @@ public class Notification {
 
     //lawyerId
     //con el atributo "createdAt" es suficiente?
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "lawyer_id", nullable = false)
+    @JsonIgnore
+    private Lawyer lawyer;
 }

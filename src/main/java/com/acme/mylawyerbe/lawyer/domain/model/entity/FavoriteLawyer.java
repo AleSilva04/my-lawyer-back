@@ -33,4 +33,8 @@ public class FavoriteLawyer {
     private Client client;
 
     // de 1 a muchos lawyers a Favorite
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "lawyer_id", nullable = false)
+    @JsonIgnore
+    private Lawyer lawyer;
 }

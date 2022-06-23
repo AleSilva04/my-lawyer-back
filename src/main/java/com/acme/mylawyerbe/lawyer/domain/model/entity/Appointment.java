@@ -1,6 +1,5 @@
 package com.acme.mylawyerbe.lawyer.domain.model.entity;
 
-import com.acme.mylawyerbe.shared.domain.model.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -33,4 +32,8 @@ public class Appointment {
 
     //lawyerId
     //con el atributo "createdAt" es suficiente?
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "lawyer_id", nullable = false)
+    @JsonIgnore
+    private Lawyer lawyer;
 }
