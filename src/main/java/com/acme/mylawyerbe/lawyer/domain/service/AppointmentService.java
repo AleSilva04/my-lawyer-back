@@ -21,12 +21,6 @@ public interface AppointmentService {
 
     Page<Appointment> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
-    //falta por lawyerId
-
-    Appointment getById(Long appointmentId);
-
-    Appointment getByName(String name);
-
     //opciones crud
 
     //tambien se tiene que agregar el "Long lawyerId"

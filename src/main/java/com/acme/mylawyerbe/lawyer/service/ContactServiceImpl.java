@@ -1,15 +1,21 @@
 package com.acme.mylawyerbe.lawyer.service;
 
 import com.acme.mylawyerbe.lawyer.domain.model.entity.Contact;
+import com.acme.mylawyerbe.lawyer.domain.persistence.ClientRepository;
 import com.acme.mylawyerbe.lawyer.domain.persistence.ContactRepository;
+import com.acme.mylawyerbe.lawyer.domain.persistence.LawyerRepository;
 import com.acme.mylawyerbe.lawyer.domain.service.ContactService;
+import com.acme.mylawyerbe.shared.exception.ResourceNotFoundException;
+import com.acme.mylawyerbe.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -20,9 +26,15 @@ public class ContactServiceImpl implements ContactService {
 
     private final Validator validator;
 
-    public ContactServiceImpl(ContactRepository contactRepository, Validator validator) {
+    private final ClientRepository clientRepository;
+
+    private final LawyerRepository lawyerRepository;
+
+    public ContactServiceImpl(ContactRepository contactRepository, Validator validator, ClientRepository clientRepository, LawyerRepository lawyerRepository) {
         this.contactRepository = contactRepository;
         this.validator = validator;
+        this.clientRepository = clientRepository;
+        this.lawyerRepository = lawyerRepository;
     }
 
     //Aca las clases cambian un poco lo habra hecho en clase?
@@ -34,47 +46,66 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> getAllByClientId(Long clientId) {
-        return null;
+        return contactRepository.findByClientId(clientId);
     }
 
     @Override
     public Page<Contact> getAllByClientId(Long clientId, Pageable pageable) {
-        return null;
+        return contactRepository.findByClientId(clientId, pageable);
     }
 
     @Override
     public List<Contact> getAllByLawyerId(Long lawyerId) {
-        return null;
+        return contactRepository.findByLawyerId(lawyerId);
     }
 
     @Override
     public Page<Contact> getAllByLawyerId(Long lawyerId, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Contact getById(Long contactId) {
-        return null;
-    }
-
-    @Override
-    public Contact getByName(String name) {
-        return null;
+        return contactRepository.findByLawyerId(lawyerId, pageable);
     }
 
     @Override
     public Contact create(Long lawyerId, Long clientId, Contact contact) {
-        return null;
+        Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
+
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        return lawyerRepository.findById(lawyerId).map(lawyer -> {
+            contact.setLawyer(lawyer);
+            return contactRepository.save(contact);
+        }).orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId));
+        return clientRepository.findById(clientId).map(client -> {
+            contact.setClient(client);
+            return contactRepository.save(contact);
+        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
     }
 
     @Override
     public Contact update(Long lawyerId, Long clientId, Long contactId, Contact request) {
-        return null;
+        Set<ConstraintViolation<Contact>> violations = validator.validate(request);
+
+        if (!violations.isEmpty())
+            throw new ResourceValidationException(ENTITY, violations);
+
+        if (!lawyerRepository.existsById(lawyerId))
+            throw new ResourceNotFoundException("Lawyer", lawyerId);
+
+        if (!clientRepository.existsById(clientId))
+            throw new ResourceNotFoundException("Client", clientId);
+
+        return contactRepository.findById(contactId).map(existingContact ->
+                contactRepository.save(existingContact.withDate(request.getDate())))
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
+                .orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
     }
 
     @Override
     public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long contactId) {
-        return null;
+        return contactRepository.findByIdAndClientIdAndLawyerId(contactId, clientId, lawyerId).map(contact -> {
+            contactRepository.delete(contact);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, contactId));
     }
 
 }

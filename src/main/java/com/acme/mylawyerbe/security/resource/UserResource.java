@@ -14,5 +14,4 @@ public class UserResource {
     private String username;
     private String email;
     private List<RoleResource> roles;
-    private String token;
 }

@@ -14,7 +14,7 @@ public interface FavoriteLawyerRepository extends JpaRepository<FavoriteLawyer, 
     //solo seria necesario buscar por id del cliente
     //findBy vs findAllBy
     //yo creo que es finAllBy porque es una lista
-    List<FavoriteLawyer> findAllByClient_Id(Long clientId);
+    List<FavoriteLawyer> findByClientId(Long clientId);
 
-    Page<FavoriteLawyer> findAllByClient_Id(Long clientId, Pageable pageable);
+    Page<FavoriteLawyer> findByClientId(Long clientId, Pageable pageable);
 }

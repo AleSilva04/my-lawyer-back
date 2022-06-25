@@ -20,10 +20,6 @@ public interface ContactService {
 
     Page<Contact> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
-    Contact getById(Long contactId);
-
-    Contact getByName(String name);
-
     //crud
 
     //tambien se tiene que agregar el "Long lawyerId"

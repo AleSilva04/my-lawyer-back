@@ -36,4 +36,5 @@ public class Appointment {
     @JoinColumn(name = "lawyer_id", nullable = false)
     @JsonIgnore
     private Lawyer lawyer;
+
 }

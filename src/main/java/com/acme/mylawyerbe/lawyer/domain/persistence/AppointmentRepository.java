@@ -16,9 +16,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     //solo seria necesario buscar por id del cliente
     //findBy vs findAllBy
     //yo creo que es finAllBy porque es una lista
-    List<Appointment> findAllByClient_Id(Long clientId);
+    List<Appointment> findByClientId(Long clientId);
 
-    Page<Appointment> findAllByClient_Id(Long clientId, Pageable pageable);
+    Page<Appointment> findByClientId(Long clientId, Pageable pageable);
 
-    //Optional<Appointment> findByIdAndClient_Id(Long id, Long clientId);
+    List<Appointment> findByLawyerId(Long lawyerId);
+
+    Page<Appointment> findByLawyerId(Long lawyerId, Pageable pageable);
+
+    Optional<Appointment> findByIdAndClientIdAndLawyerId(Long id, Long clientId, Long lawyerId);
 }

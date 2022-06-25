@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
@@ -14,7 +15,13 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     //solo seria necesario buscar por id del cliente
     //findBy vs findAllBy
     //yo creo que es finAllBy porque es una lista
-    List<Contact> findAllByClient_Id(Long clientId);
+    List<Contact> findByClientId(Long clientId);
 
-    Page<Contact> findAllByClient_Id(Long clientId, Pageable pageable);
+    Page<Contact> findByClientId(Long clientId, Pageable pageable);
+
+    List<Contact> findByLawyerId(Long lawyerId);
+
+    Page<Contact> findByLawyerId(Long lawyerId, Pageable pageable);
+
+    Optional<Contact> findByIdAndClientIdAndLawyerId(Long id, Long clientId, Long lawyerId);
 }
