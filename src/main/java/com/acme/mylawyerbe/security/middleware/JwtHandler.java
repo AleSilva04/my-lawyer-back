@@ -6,9 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class JwtHandler {
     //esta clase sirve para crear un token
 
@@ -17,7 +19,7 @@ public class JwtHandler {
     private int expirationDays;
 
     //secret: input para generar el token
-    @Value("WriteHereYourSecretForTokenSigningCredentials")
+    @Value("WriteHereYourSecretStringForTokenSigningCredentials")
     private String secret;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtHandler.class);
