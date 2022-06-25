@@ -7,16 +7,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LawyerSpecialtyRepository extends JpaRepository<LawyerSpecialty, Long> {
 
-    List<LawyerSpecialty> findAllByLawyer_Id(Long lawyerId);
+    List<LawyerSpecialty> findByLawyerId(Long lawyerId);
 
-    Page<LawyerSpecialty> findAllByLawyer_Id(Long lawyerId, Pageable pageable);
+    Page<LawyerSpecialty> findByLawyerId(Long lawyerId, Pageable pageable);
 
-    List<LawyerSpecialty> findAllBySpecialty_Id(Long specialtyId);
+    List<LawyerSpecialty> findBySpecialtyId(Long specialtyId);
 
-    Page<LawyerSpecialty> findAllBySpecialty_Id(Long specialtyId, Pageable pageable);
+    Page<LawyerSpecialty> findBySpecialtyId(Long specialtyId, Pageable pageable);
+
+    Optional<LawyerSpecialty> findByIdAndLawyerIdAndSpecialtyId(Long id, Long lawyerId, Long specialtyId);
 
 }

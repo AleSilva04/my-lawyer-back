@@ -30,5 +30,5 @@ public interface AppointmentService {
     Appointment update(Long lawyerId, Long clientId, Long appointmentId, Appointment request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long appointmentId);
+    ResponseEntity<?> delete(Long appointmentId, Long clientId, Long lawyerId);
 }

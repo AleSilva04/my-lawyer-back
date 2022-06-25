@@ -101,7 +101,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long contactId) {
+    public ResponseEntity<?> delete(Long contactId, Long clientId, Long lawyerId) {
         return contactRepository.findByIdAndClientIdAndLawyerId(contactId, clientId, lawyerId).map(contact -> {
             contactRepository.delete(contact);
             return ResponseEntity.ok().build();

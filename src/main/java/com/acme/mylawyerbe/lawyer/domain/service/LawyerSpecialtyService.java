@@ -19,12 +19,10 @@ public interface LawyerSpecialtyService {
 
     Page<LawyerSpecialty> getAllBySpecialtyId(Long specialtyId, Pageable pageable);
 
-    LawyerSpecialty getById(Long lawyerSpecialtyId);
-
     //Crud
     LawyerSpecialty create(Long lawyerId, Long specialtyId, LawyerSpecialty lawyerSpecialty);
 
     LawyerSpecialty update(Long lawyerId, Long specialtyId, Long lawyerSpecialtyId, LawyerSpecialty request);
 
-    ResponseEntity<?> delete(Long lawyerId, Long specialtyId, Long lawyerSpecialtyId);
+    ResponseEntity<?> delete(Long lawyerSpecialtyId, Long lawyerId, Long specialtyId);
 }

@@ -72,7 +72,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new ResourceValidationException(ENTITY, violations);
 
         //TODO: como retorno las 2 relaciones?
-        return lawyerRepository.findById(lawyerId).map((lawyer) -> {
+        return lawyerRepository.findById(lawyerId).map(lawyer -> {
             appointment.setLawyer(lawyer);
             return appointmentRepository.save(appointment);
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId));
@@ -102,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public ResponseEntity<?> delete(Long lawyerId, Long clientId, Long appointmentId) {
+    public ResponseEntity<?> delete(Long appointmentId, Long clientId, Long lawyerId) {
         return appointmentRepository.findByIdAndClientIdAndLawyerId(appointmentId, clientId, lawyerId).map(appointment -> {
             appointmentRepository.delete(appointment);
             return ResponseEntity.ok().build();

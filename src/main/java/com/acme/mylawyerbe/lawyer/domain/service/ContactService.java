@@ -29,5 +29,5 @@ public interface ContactService {
     Contact update(Long lawyerId, Long clientId, Long contactId, Contact request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long contactId);
+    ResponseEntity<?> delete(Long contactId, Long clientId, Long lawyerId);
 }

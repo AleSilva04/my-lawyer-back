@@ -20,8 +20,6 @@ public interface FavoriteLawyerService {
 
     Page<FavoriteLawyer> getAllByLawyerId(Long lawyerId, Pageable pageable);
 
-    FavoriteLawyer getById(Long favoriteLawyerId);
-
     //crud
 
     //tambien se tiene que agregar el "Long lawyerId"
@@ -31,5 +29,5 @@ public interface FavoriteLawyerService {
     FavoriteLawyer update(Long lawyerId, Long clientId, Long favoriteLawyerId, FavoriteLawyer request);
 
     //tambien se tiene que agregar el "Long lawyerId"
-    ResponseEntity<?> delete(Long lawyerId, Long clientId, Long favoriteLawyerId);
+    ResponseEntity<?> delete(Long favoriteLawyerId, Long clientId, Long lawyerId);
 }

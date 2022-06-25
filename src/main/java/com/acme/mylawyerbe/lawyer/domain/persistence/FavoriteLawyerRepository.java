@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FavoriteLawyerRepository extends JpaRepository<FavoriteLawyer, Long> {
@@ -17,4 +18,10 @@ public interface FavoriteLawyerRepository extends JpaRepository<FavoriteLawyer, 
     List<FavoriteLawyer> findByClientId(Long clientId);
 
     Page<FavoriteLawyer> findByClientId(Long clientId, Pageable pageable);
+
+    List<FavoriteLawyer> findByLawyerId(Long lawyerId);
+
+    Page<FavoriteLawyer> findByLawyerId(Long lawyerId, Pageable pageable);
+
+    Optional<FavoriteLawyer> findByIdAndClientIdAndLawyerId(Long id, Long clientId, Long lawyerId);
 }
