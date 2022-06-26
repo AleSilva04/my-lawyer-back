@@ -34,11 +34,11 @@ public class ClientAppointmentsController {
         return mapper.modelListPage(appointmentService.getAllByClientId(clientId), pageable);
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    /*@PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
     public Page<AppointmentResource> getAllAppointmentByLawyerId(@PathVariable Long lawyerId, Pageable pageable){
         return mapper.modelListPage(appointmentService.getAllByLawyerId(lawyerId), pageable);
-    }
+    }*/
 
     @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping
@@ -57,9 +57,9 @@ public class ClientAppointmentsController {
         return mapper.toResource(appointmentService.update(lawyerId, clientId, appointmentId, mapper.toModel(resource)));
     }
 
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    /*@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping("{appointmentId}")
     public ResponseEntity<?> deleteAppointment(@PathVariable Long appointmentId,
                                                @PathVariable Long clientId,
-                                               @PathVariable Long lawyerId)
+                                               @PathVariable Long lawyerId)*/
 }

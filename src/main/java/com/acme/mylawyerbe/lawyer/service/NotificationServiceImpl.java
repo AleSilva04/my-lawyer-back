@@ -73,13 +73,16 @@ public class NotificationServiceImpl implements NotificationService {
 
         return lawyerRepository.findById(lawyerId).map(lawyer -> {
             notification.setLawyer(lawyer);
-            return notificationRepository.save(notification);
+            return clientRepository.findById(clientId).map(client -> {
+                notification.setClient(client);
+                return notificationRepository.save(notification);
+            }).orElseThrow(() -> new ResourceNotFoundException("Client",clientId));
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer",lawyerId));
 
-        return clientRepository.findById(clientId).map(client -> {
+        /*return clientRepository.findById(clientId).map(client -> {
             notification.setClient(client);
             return notificationRepository.save(notification);
-        }).orElseThrow(() -> new ResourceNotFoundException("Client",clientId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Client",clientId));*/
     }
 
     @Override
@@ -97,8 +100,7 @@ public class NotificationServiceImpl implements NotificationService {
 
         return notificationRepository.findById(notificationId).map(existingNotification ->
                 notificationRepository.save(existingNotification.withDate(request.getDate())))
-                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
-                .orElseThrow(() -> new ResourceNotFoundException("Client",clientId));
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", "Client", lawyerId, clientId));
     }
 
     @Override

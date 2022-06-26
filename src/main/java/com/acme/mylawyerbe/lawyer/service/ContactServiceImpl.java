@@ -73,12 +73,15 @@ public class ContactServiceImpl implements ContactService {
 
         return lawyerRepository.findById(lawyerId).map(lawyer -> {
             contact.setLawyer(lawyer);
-            return contactRepository.save(contact);
+            return clientRepository.findById(clientId).map(client -> {
+                contact.setClient(client);
+                return contactRepository.save(contact);
+            }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId));
-        return clientRepository.findById(clientId).map(client -> {
+        /*return clientRepository.findById(clientId).map(client -> {
             contact.setClient(client);
             return contactRepository.save(contact);
-        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));*/
     }
 
     @Override
@@ -96,8 +99,7 @@ public class ContactServiceImpl implements ContactService {
 
         return contactRepository.findById(contactId).map(existingContact ->
                 contactRepository.save(existingContact.withDate(request.getDate())))
-                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
-                .orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", "Client", lawyerId, clientId));
     }
 
     @Override

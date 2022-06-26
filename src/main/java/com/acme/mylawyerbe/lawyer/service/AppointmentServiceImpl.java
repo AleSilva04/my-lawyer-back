@@ -74,12 +74,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         //TODO: como retorno las 2 relaciones?
         return lawyerRepository.findById(lawyerId).map(lawyer -> {
             appointment.setLawyer(lawyer);
-            return appointmentRepository.save(appointment);
+            return clientRepository.findById(clientId).map(client -> {
+                appointment.setClient(client);
+                return appointmentRepository.save(appointment);
+            }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId));
-        return clientRepository.findById(clientId).map(client -> {
+
+        /*return clientRepository.findById(clientId).map(client -> {
             appointment.setClient(client);
             return appointmentRepository.save(appointment);
-        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));*/
+
     }
 
     @Override
@@ -97,8 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return appointmentRepository.findById(appointmentId).map(existingAppointment ->
                 appointmentRepository.save(existingAppointment.withDate(request.getDate())))
-                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
-                .orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", "Client", lawyerId, clientId));
     }
 
     @Override

@@ -71,14 +71,15 @@ public class LawyerSpecialtyServiceImpl implements LawyerSpecialtyService {
 
         return lawyerRepository.findById(lawyerId).map(lawyer -> {
             lawyerSpecialty.setLawyer(lawyer);
-            return lawyerSpecialtyRepository.save(lawyerSpecialty);
+            return specialtyRepository.findById(specialtyId).map(specialty -> {
+                lawyerSpecialty.setSpecialty(specialty);
+                return lawyerSpecialtyRepository.save(lawyerSpecialty);
+            }).orElseThrow(() -> new ResourceNotFoundException("Specialty", specialtyId));
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer",lawyerId));
-        return specialtyRepository.findById(specialtyId).map(specialty -> {
+        /*return specialtyRepository.findById(specialtyId).map(specialty -> {
             lawyerSpecialty.setSpecialty(specialty);
             return lawyerSpecialtyRepository.save(lawyerSpecialty);
-        }).orElseThrow(() -> new ResourceNotFoundException("Specialty", specialtyId));
-
-        return null;
+        }).orElseThrow(() -> new ResourceNotFoundException("Specialty", specialtyId));*/
     }
 
     @Override
@@ -97,8 +98,7 @@ public class LawyerSpecialtyServiceImpl implements LawyerSpecialtyService {
 
         return lawyerSpecialtyRepository.findById(lawyerSpecialtyId).map(existingLawyerSpecialty ->
                 lawyerSpecialtyRepository.save(existingLawyerSpecialty.withDate(request.getDate())))
-                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
-                .orElseThrow(() -> new ResourceNotFoundException("Specialty", specialtyId));
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", "Client", lawyerId, specialtyId));
     }
     //TODO: Recuerda poner en orden los parametros en los controller
     @Override

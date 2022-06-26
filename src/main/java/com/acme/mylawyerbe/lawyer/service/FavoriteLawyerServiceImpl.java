@@ -73,14 +73,15 @@ public class FavoriteLawyerServiceImpl implements FavoriteLawyerService {
 
         return lawyerRepository.findById(lawyerId).map(lawyer -> {
             favoriteLawyer.setLawyer(lawyer);
-            return favoriteLawyerRepository.save(favoriteLawyer);
+            return clientRepository.findById(clientId).map(client -> {
+                favoriteLawyer.setClient(client);
+                return favoriteLawyerRepository.save(favoriteLawyer);
+            }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
         }).orElseThrow(() -> new ResourceNotFoundException("Lawyer",lawyerId));
-        return clientRepository.findById(clientId).map(client -> {
+        /*return clientRepository.findById(clientId).map(client -> {
             favoriteLawyer.setClient(client);
             return favoriteLawyerRepository.save(favoriteLawyer);
-        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
-
-        return null;
+        }).orElseThrow(() -> new ResourceNotFoundException("Client", clientId));*/
     }
 
     @Override
@@ -98,8 +99,7 @@ public class FavoriteLawyerServiceImpl implements FavoriteLawyerService {
 
         return favoriteLawyerRepository.findById(favoriteLawyerId).map(existingFavoriteLawyer ->
                 favoriteLawyerRepository.save(existingFavoriteLawyer.withDate(request.getDate())))
-                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", lawyerId))
-                .orElseThrow(() -> new ResourceNotFoundException("Client", clientId));
+                .orElseThrow(() -> new ResourceNotFoundException("Lawyer", "Client", lawyerId, clientId));
     }
 
     @Override
