@@ -9,11 +9,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class AuthenticateRequest {
-    @NotBlank
+
     @NotNull
+    @NotBlank
     private String username;
 
-    @NotBlank
     @NotNull
+    @NotBlank
     private String password;
 }

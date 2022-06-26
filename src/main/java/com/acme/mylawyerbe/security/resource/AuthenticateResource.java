@@ -15,4 +15,5 @@ public class AuthenticateResource {
     private String email;
     private List<String> roles;
     private String token;
+
 }

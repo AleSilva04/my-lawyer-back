@@ -6,9 +6,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@With
 @AllArgsConstructor
 @NoArgsConstructor
+@With
 public class UserResource {
     private Long id;
     private String username;

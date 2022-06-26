@@ -9,11 +9,10 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    //opciones de acceso a datos que tiene un usuario en termino de seguridad
-    //validar si el usuario existe
-    Boolean existsByEmail(String email);
+    Optional<User> findByUsername(String username);
 
     Boolean existsByUsername(String username);
 
-    Optional<User> findByUsername(String username);
+    Boolean existsByEmail(String email);
+
 }

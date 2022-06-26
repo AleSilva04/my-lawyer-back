@@ -8,14 +8,12 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@With
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@With
 @Table(name = "roles")
 public class Role extends AuditModel {
-
-    //2 atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,5 +21,4 @@ public class Role extends AuditModel {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private Roles name;
-
 }

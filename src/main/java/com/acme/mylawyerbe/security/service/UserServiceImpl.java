@@ -58,26 +58,24 @@ public class UserServiceImpl implements UserService {
     EnhancedModelMapper mapper;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(
-                        "User not found with username: %s", username)));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found with username: %s", username)));
         return UserDetailsImpl.build(user);
     }
 
     @Override
-    public ResponseEntity<?> authenticate(AuthenticateRequest request){
+    public ResponseEntity<?> authenticate(AuthenticateRequest request) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getPassword(), request.getPassword()
+                            request.getUsername(), request.getPassword()
                     ));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             String token = handler.generateToken(authentication);
 
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
             List<String> roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
@@ -89,62 +87,72 @@ public class UserServiceImpl implements UserService {
             AuthenticateResponse response = new AuthenticateResponse(resource);
 
             return ResponseEntity.ok(response.getResource());
-        }catch (Exception e){
-            AuthenticateResponse response = new AuthenticateResponse(String
-                    .format("An error occurred while authenticating: %s", e.getMessage()));
+
+
+        } catch (Exception e) {
+            AuthenticateResponse response = new AuthenticateResponse(String.format("An error occurred while authenticating: %s", e.getMessage()));
             return ResponseEntity.badRequest().body(response.getMessage());
         }
+
     }
 
     @Override
-    public ResponseEntity<?> register(RegisterRequest request){
-        if (userRepository.existsByUsername(request.getUsername())){
+    public ResponseEntity<?> register(RegisterRequest request) {
+
+        if (userRepository.existsByUsername(request.getUsername())) {
             AuthenticateResponse response = new AuthenticateResponse("Username is already used.");
-            return ResponseEntity.badRequest().body(response.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(response.getMessage());
         }
 
-        if (userRepository.existsByEmail(request.getEmail())){
+        if (userRepository.existsByEmail(request.getEmail())) {
             AuthenticateResponse response = new AuthenticateResponse("Email is already used.");
-            return ResponseEntity.badRequest().body(response.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(response.getMessage());
         }
 
         try {
+
             Set<String> rolesStringSet = request.getRoles();
             Set<Role> roles = new HashSet<>();
 
-            if (rolesStringSet == null){
+            if (rolesStringSet == null) {
                 roleRepository.findByName(Roles.ROLE_USER)
                         .map(roles::add)
-                        .orElseThrow(() -> new RuntimeException("Role not found"));
+                        .orElseThrow(() -> new RuntimeException("Role not found."));
             } else {
                 rolesStringSet.forEach(roleString ->
                         roleRepository.findByName(Roles.valueOf(roleString))
                                 .map(roles::add)
-                                .orElseThrow(() -> new RuntimeException("Role not found")));
+                                .orElseThrow(() -> new RuntimeException("Role not found.")));
             }
 
             logger.info("Roles: {}", roles);
+
             User user = new User()
                     .withUsername(request.getUsername())
                     .withEmail(request.getEmail())
-                    .withPassword(request.getPassword())
+                    .withPassword(encoder.encode(request.getPassword()))
                     .withRoles(roles);
+
 
             userRepository.save(user);
             UserResource resource = mapper.map(user, UserResource.class);
             RegisterResponse response = new RegisterResponse(resource);
-
             return ResponseEntity.ok(response.getResource());
-        }catch (Exception e){
+
+        } catch (Exception e) {
+
             RegisterResponse response = new RegisterResponse(e.getMessage());
             return ResponseEntity.badRequest().body(response.getMessage());
+
         }
+
+
     }
 
-    @Override
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userRepository.findAll();
     }
-
 
 }

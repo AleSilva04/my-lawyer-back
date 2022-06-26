@@ -19,13 +19,11 @@ public class DatabaseSeedingConfig {
     private RoleService roleService;
 
     @EventListener
-    public void onApplicationReady(ApplicationReadyEvent event){
+    public void onApplicationReady(ApplicationReadyEvent event) {
         String name = event.getApplicationContext().getId();
-        logger.info("Starting Database Seeding process for {} at {}", name,
-                new Timestamp(System.currentTimeMillis()));
+        logger.info("Starting Database Seeding Process for {} at {}", name, new Timestamp(System.currentTimeMillis()));
         roleService.seed();
-        logger.info("Finished Database Seeding process for {} at {}", name,
-                new Timestamp(System.currentTimeMillis()));
+        logger.info("Finished Database Seeding Process for {} at {}", name, new Timestamp(System.currentTimeMillis()));
     }
 
 }

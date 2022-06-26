@@ -22,14 +22,17 @@ public class RoleServiceImpl implements RoleService {
     public void seed() {
         Arrays.stream(DEFAULT_ROLES).forEach(name -> {
             Roles roleName = Roles.valueOf(name);
-            if (!roleRepository.existsByName(roleName)){
-                roleRepository.save(new Role().withName(roleName));
+            if(!roleRepository.existsByName(roleName)) {
+                roleRepository.save((new Role()).withName(roleName));
             }
-        });
+        } );
+
     }
 
     @Override
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
+
+
 }

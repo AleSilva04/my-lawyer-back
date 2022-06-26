@@ -21,7 +21,6 @@ import java.util.LinkedList;
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-    //aca no tiene que cambiar?
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthorizationFilter.class);
 
     @Autowired
@@ -30,34 +29,48 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Autowired
     private UserServiceImpl userService;
 
-    private String parseTokenFrom(HttpServletRequest request){
+    private String parseTokenFrom(HttpServletRequest request) {
+
         String authorizationHeader = request.getHeader("Authorization");
 
         if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith("Bearer")) {
+
             return new LinkedList<>(Arrays.asList(authorizationHeader.split(" "))).getLast();
+
         }
 
         return null;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-        throws ServletException, IOException{
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
         try {
             String token = parseTokenFrom(request);
-            if (token != null && handler.validateToken(token)){
+            if (token != null && handler.validateToken(token)) {
+
                 logger.info("Token: {}", token);
+
                 String username = handler.getUsernameFrom(token);
+
                 UserDetails principal = userService.loadUserByUsername(username);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         principal, null, principal.getAuthorities());
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
-        }catch (Exception e){
+        } catch (Exception e) {
+
             logger.error("User Authentication cannot be set: {}", e.getMessage());
+
         }
+
         filterChain.doFilter(request, response);
     }
+
 
 }

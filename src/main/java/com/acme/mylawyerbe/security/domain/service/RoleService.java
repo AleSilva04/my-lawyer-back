@@ -9,5 +9,4 @@ public interface RoleService {
     void seed();
 
     List<Role> getAll();
-
 }

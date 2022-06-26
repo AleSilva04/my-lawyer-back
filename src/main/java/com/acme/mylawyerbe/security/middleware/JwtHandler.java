@@ -12,61 +12,61 @@ import java.util.Date;
 
 @Component
 public class JwtHandler {
-    //esta clase sirve para crear un token
-
-    //en cuanto tiempo va a expirar
-    @Value("7")
-    private int expirationDays;
-
-    //secret: input para generar el token
-    @Value("WriteHereYourSecretStringForTokenSigningCredentials")
-    private String secret;
-
     private static final Logger logger = LoggerFactory.getLogger(JwtHandler.class);
 
-    //funcion que nos permita crear un token
-    public String generateToken(Authentication authentication){
+    @Value("${authorization.jwt.secret}")
+    private String secret;
+
+    @Value("${authorization.jwt.expiration.days}")
+    private int expirationDays;
+
+    public String generateToken(Authentication authentication) {
 
         String subject = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
 
         Date issuedAt = new Date();
+
         Date expiration = DateUtils.addDays(issuedAt, expirationDays);
 
-        return Jwts.builder().setSubject(subject)
+        return Jwts.builder()
+                .setSubject(subject)
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
+
     }
 
-    public String getUsernameFrom(String token){
+    public String getUsernameFrom(String token) {
+
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+
     }
 
-    //el token sigue siendo valido?
-    public boolean validateToken(String token){
+    public boolean validateToken(String token) {
         try {
             Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token);
             return true;
-        }
-        catch (SignatureException e){
+        } catch (SignatureException e) {
             logger.error("Invalid JSON Web Token Signature: {}", e.getMessage());
-        }catch (MalformedJwtException e){
+        } catch (MalformedJwtException e) {
             logger.error("Invalid JSON Web Token: {}", e.getMessage());
-        }catch (ExpiredJwtException e){
-            logger.error("Invalid JSON Web Token is expired: {}", e.getMessage());
-        }catch (UnsupportedJwtException e){
+        } catch (ExpiredJwtException e) {
+            logger.error("JSON Web Token is expired: {}", e.getMessage());
+        } catch (UnsupportedJwtException e) {
             logger.error("JSON Web Token is unsupported: {}", e.getMessage());
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             logger.error("JSON Web Token claims string is empty: {}", e.getMessage());
         }
         return false;
+
     }
+
 
 }

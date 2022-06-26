@@ -27,35 +27,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthorizationFilter authorizationFilter(){
+    public JwtAuthorizationFilter authorizationFilter() {
         return new JwtAuthorizationFilter();
     }
 
+
     @Override
-    public void configure(AuthenticationManagerBuilder builder) throws Exception{
+    public void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userService);
     }
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
+
         http.cors().and().csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/v1/users/auth/*", "/swagger-ui/**", "/api-docs/**").permitAll()
                 .anyRequest().authenticated();
+
         http.addFilterBefore(authorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
 }

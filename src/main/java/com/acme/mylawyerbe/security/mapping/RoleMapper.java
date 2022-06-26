@@ -26,14 +26,20 @@ public class RoleMapper implements Serializable {
         }
     };
 
-    public RoleResource toResource(Role model){
+    // Object Mapping
+    public RoleResource toResource(Role model) {
+
         mapper.addConverter(roleToString);
         return mapper.map(model, RoleResource.class);
+
     }
 
-    public Page<RoleResource> modelListToPage(List<Role> modelList, Pageable pageable){
+    public Page<RoleResource> modelListToPage(List<Role> modelList, Pageable pageable) {
+
         mapper.addConverter(roleToString);
         return new PageImpl<>(mapper.mapList(modelList, RoleResource.class), pageable, modelList.size());
     }
+
+
 
 }

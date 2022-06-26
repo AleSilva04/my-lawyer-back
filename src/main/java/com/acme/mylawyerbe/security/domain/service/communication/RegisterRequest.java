@@ -11,7 +11,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class RegisterRequest {
-
     @NotNull
     @NotBlank
     private String username;
@@ -26,4 +25,5 @@ public class RegisterRequest {
     private String password;
 
     private Set<String> roles;
+
 }
