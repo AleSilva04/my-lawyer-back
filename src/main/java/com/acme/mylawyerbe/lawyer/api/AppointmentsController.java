@@ -3,6 +3,7 @@ package com.acme.mylawyerbe.lawyer.api;
 import com.acme.mylawyerbe.lawyer.domain.service.AppointmentService;
 import com.acme.mylawyerbe.lawyer.mapping.AppointmentMapper;
 import com.acme.mylawyerbe.lawyer.resource.AppointmentResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,7 @@ public class AppointmentsController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
+    @Operation(summary = "Get appointments")
     public Page<AppointmentResource> getAllAppointments(Pageable pageable){
         return mapper.modelListPage(appointmentService.getAll(), pageable);
     }

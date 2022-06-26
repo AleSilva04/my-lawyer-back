@@ -5,6 +5,7 @@ import com.acme.mylawyerbe.lawyer.mapping.AppointmentMapper;
 import com.acme.mylawyerbe.lawyer.resource.AppointmentResource;
 import com.acme.mylawyerbe.lawyer.resource.CreateAppointmentResource;
 import com.acme.mylawyerbe.lawyer.resource.UpdateAppointmentResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @SecurityRequirement(name = "acme")
 @RestController
-@RequestMapping("/api/v1/clients/{clientId}/appointment")
+@RequestMapping("/api/v1/clients/{clientId}/appointments")
 @Tag(name = "Clients", description = "Create, read, update and delete clients")
 public class ClientAppointmentsController {
 
@@ -30,18 +31,14 @@ public class ClientAppointmentsController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
+    @Operation(summary = "Get all appointments by client ID")
     public Page<AppointmentResource> getAllAppointmentByClientId(@PathVariable Long clientId, Pageable pageable){
         return mapper.modelListPage(appointmentService.getAllByClientId(clientId), pageable);
     }
 
-    /*@PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
-    @GetMapping
-    public Page<AppointmentResource> getAllAppointmentByLawyerId(@PathVariable Long lawyerId, Pageable pageable){
-        return mapper.modelListPage(appointmentService.getAllByLawyerId(lawyerId), pageable);
-    }*/
-
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    /*@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping
+    @Operation(summary = "Create appointment by ID")
     public AppointmentResource createAppointment(@PathVariable Long lawyerId,
                                                  @PathVariable Long clientId,
                                                  @RequestBody CreateAppointmentResource resource){
@@ -50,6 +47,7 @@ public class ClientAppointmentsController {
 
     @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping("{appointmentId}")
+    @Operation(summary = "Update appointment by ID")
     public AppointmentResource updateAppointment(@PathVariable Long lawyerId,
                                                  @PathVariable Long clientId,
                                                  @PathVariable Long appointmentId,
@@ -57,9 +55,11 @@ public class ClientAppointmentsController {
         return mapper.toResource(appointmentService.update(lawyerId, clientId, appointmentId, mapper.toModel(resource)));
     }
 
-    /*@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping("{appointmentId}")
     public ResponseEntity<?> deleteAppointment(@PathVariable Long appointmentId,
                                                @PathVariable Long clientId,
-                                               @PathVariable Long lawyerId)*/
+                                               @PathVariable Long lawyerId) {
+        return appointmentService.delete(appointmentId, clientId, lawyerId);
+    }*/
 }
