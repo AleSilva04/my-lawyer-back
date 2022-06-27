@@ -38,14 +38,14 @@ public class ClientAppointmentsController {
 
     /*@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping
-    @Operation(summary = "Create appointment by ID")
+    @Operation(summary = "Create appointment by lawyer")
     public AppointmentResource createAppointment(@PathVariable Long lawyerId,
                                                  @PathVariable Long clientId,
                                                  @RequestBody CreateAppointmentResource resource){
         return mapper.toResource(appointmentService.create(lawyerId , clientId, mapper.toModel(resource)));
-    }
+    }*/
 
-    @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    /*@PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @PostMapping("{appointmentId}")
     @Operation(summary = "Update appointment by ID")
     public AppointmentResource updateAppointment(@PathVariable Long lawyerId,
