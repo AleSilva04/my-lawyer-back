@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SecurityRequirement(name = "acme")
 @RestController
-@RequestMapping("api/v1/favoriteLawyers")
+@RequestMapping("/api/v1/favoriteLawyers")
 @Tag(name = "FavoriteLawyers", description = "Create, read, update and delete favorite lawyers")
 public class FavoriteLawyersController {
     //TODO: revisar endpoints que esten correctamente escritos acorde al Frontend

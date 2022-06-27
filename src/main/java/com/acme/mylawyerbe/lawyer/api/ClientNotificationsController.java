@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name = "acme")
 @RestController
 @RequestMapping("/api/v1/clients/{clientId}/notifications")
-@Tag(name = "Notifications", description = "Create, read, update and delete notifications")
+@Tag(name = "Clients", description = "Create, read, update and delete clients")
 public class ClientNotificationsController {
 
     private final NotificationService notificationService;

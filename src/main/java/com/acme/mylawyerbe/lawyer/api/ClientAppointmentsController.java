@@ -56,7 +56,7 @@ public class ClientAppointmentsController {
     }
 
     @PreAuthorize("hasRole('INSTRUCTOR') or hasRole('ADMIN')")
-    @PostMapping("{appointmentId}")
+    @DeleteMapping("{appointmentId}")
     public ResponseEntity<?> deleteAppointment(@PathVariable Long appointmentId,
                                                @PathVariable Long clientId,
                                                @PathVariable Long lawyerId) {

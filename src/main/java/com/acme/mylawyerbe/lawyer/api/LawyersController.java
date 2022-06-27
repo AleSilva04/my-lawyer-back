@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @SecurityRequirement(name = "acme")
 @RestController
-@RequestMapping(value = "api/v1/lawyers", produces = "application/json")
+@RequestMapping(value = "/api/v1/lawyers", produces = "application/json")
 @Tag(name = "Lawyers", description = "Create, read, update and delete lawyers")
 public class LawyersController {
 

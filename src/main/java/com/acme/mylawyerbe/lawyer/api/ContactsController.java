@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SecurityRequirement(name = "acme")
 @RestController
-@RequestMapping(value = "api/v1/contacts")
+@RequestMapping(value = "/api/v1/contacts")
 @Tag(name = "Contacts", description = "Create, read, update and delete contacts")
 public class ContactsController {
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SecurityRequirement(name = "acme")
 @RestController
-@RequestMapping(value = "api/v1/appointments")
+@RequestMapping(value = "/api/v1/appointments")
 @Tag(name = "Appointments", description = "Create, read, update and delete appointments")
 public class AppointmentsController {
 
