@@ -12,9 +12,6 @@ import javax.validation.constraints.Size;
 @Setter
 public class UpdateClientResource {
 
-    //qué es lo que necesito para actualizar
-    private Long id;
-
     @NotNull
     @NotBlank
     @Size(max = 100)

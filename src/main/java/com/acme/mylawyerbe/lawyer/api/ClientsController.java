@@ -43,6 +43,7 @@ public class ClientsController {
 
     @GetMapping("{clientId}")
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    @Operation(summary = "Get a client by id")
     public ClientResource getClientById(@PathVariable Long clientId){
         return mapper.toResource(clientService.getById(clientId));
     }
@@ -58,12 +59,14 @@ public class ClientsController {
 
     @PutMapping("{clientId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update Client")
     public ClientResource updateClient(@PathVariable Long clientId, @RequestBody UpdateClientResource resource){
         return mapper.toResource(clientService.update(clientId, mapper.toModel(resource)));
     }
 
     @DeleteMapping("{clientId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete Client")
     public ResponseEntity<?> deleteClient(@PathVariable Long clientId){
         return clientService.delete(clientId);
     }

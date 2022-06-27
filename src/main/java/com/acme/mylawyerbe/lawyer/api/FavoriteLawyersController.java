@@ -3,6 +3,7 @@ package com.acme.mylawyerbe.lawyer.api;
 import com.acme.mylawyerbe.lawyer.domain.service.FavoriteLawyerService;
 import com.acme.mylawyerbe.lawyer.mapping.FavoriteLawyerMapper;
 import com.acme.mylawyerbe.lawyer.resource.FavoriteLawyerResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,7 @@ public class FavoriteLawyersController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
+    @Operation(summary = "Get all favorite lawyers")
     public Page<FavoriteLawyerResource> getAllFavoriteLawyers(Pageable pageable){
         return mapper.modelListPage(favoriteLawyerService.getAll(), pageable);
     }

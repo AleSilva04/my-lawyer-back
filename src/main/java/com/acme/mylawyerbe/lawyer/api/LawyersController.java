@@ -43,6 +43,7 @@ public class LawyersController {
 
     @GetMapping("{lawyerId}")
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    @Operation(summary = "Get lawyer by ID")
     public  LawyerResource getLawyerId(@PathVariable Long lawyerId){
         return mapper.toResource(lawyerService.getById(lawyerId));
     }
@@ -58,12 +59,14 @@ public class LawyersController {
 
     @PutMapping("{lawyerId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update Lawyer")
     public LawyerResource updateLawyer(@PathVariable Long lawyerId, @RequestBody UpdateLawyerResource resource){
         return mapper.toResource(lawyerService.update(lawyerId, mapper.toModel(resource)));
     }
 
     @DeleteMapping("{lawyerId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete Lawyer")
     public ResponseEntity<?> deleteLawyer(@PathVariable Long lawyerId){
         return lawyerService.delete(lawyerId);
     }

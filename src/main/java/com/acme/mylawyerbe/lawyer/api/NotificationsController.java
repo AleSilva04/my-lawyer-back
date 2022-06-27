@@ -3,6 +3,7 @@ package com.acme.mylawyerbe.lawyer.api;
 import com.acme.mylawyerbe.lawyer.domain.service.NotificationService;
 import com.acme.mylawyerbe.lawyer.mapping.NotificationMapper;
 import com.acme.mylawyerbe.lawyer.resource.NotificationResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,7 @@ public class NotificationsController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
+    @Operation(summary = "Get all notifications")
     public Page<NotificationResource> getAllNotifications(Pageable pageable){
         return mapper.modelListPage(notificationService.getAll(), pageable);
     }

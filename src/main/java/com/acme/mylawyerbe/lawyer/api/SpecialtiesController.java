@@ -43,6 +43,7 @@ public class SpecialtiesController {
 
     @GetMapping("{specialtyId}")
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    @Operation(summary = "Get specialty by ID")
     public SpecialtyResource getSpecialtyById(@PathVariable Long specialtyId){
         return mapper.toResource(specialtyService.getById(specialtyId));
     }
@@ -58,12 +59,14 @@ public class SpecialtiesController {
 
     @PutMapping("{specialtyId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update specialty")
     public SpecialtyResource updateSpecialty(@PathVariable Long specialtyId, @RequestBody UpdateSpecialtyResource resource){
         return mapper.toResource(specialtyService.update(specialtyId, mapper.toModel(resource)));
     }
 
     @DeleteMapping("{specialtyId}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Delete specialty")
     public ResponseEntity<?> deleteSpecialty(@PathVariable Long specialtyId){
         return specialtyService.delete(specialtyId);
     }

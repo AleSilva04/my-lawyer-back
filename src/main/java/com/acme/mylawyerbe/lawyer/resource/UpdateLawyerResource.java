@@ -12,8 +12,6 @@ import javax.validation.constraints.Size;
 @Setter
 public class UpdateLawyerResource {
 
-    private Long id;
-
     @NotNull
     @NotBlank
     @Size(max = 100)

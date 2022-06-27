@@ -10,8 +10,6 @@ import javax.validation.constraints.Size;
 @Setter
 public class UpdateSpecialtyResource {
 
-    private Long id;
-
     @NotNull
     @NotBlank
     @Size(max = 100)

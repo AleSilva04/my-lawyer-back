@@ -30,7 +30,7 @@ public class AppointmentsController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
-    @Operation(summary = "Get appointments")
+    @Operation(summary = "Get all appointments")
     public Page<AppointmentResource> getAllAppointments(Pageable pageable){
         return mapper.modelListPage(appointmentService.getAll(), pageable);
     }

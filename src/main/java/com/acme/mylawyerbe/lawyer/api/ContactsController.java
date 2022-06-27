@@ -3,6 +3,7 @@ package com.acme.mylawyerbe.lawyer.api;
 import com.acme.mylawyerbe.lawyer.domain.service.ContactService;
 import com.acme.mylawyerbe.lawyer.mapping.ContactMapper;
 import com.acme.mylawyerbe.lawyer.resource.ContactResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,7 @@ public class ContactsController {
 
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
     @GetMapping
+    @Operation(summary = "Get all contacts")
     public Page<ContactResource> getAllContacts(Pageable pageable){
         return mapper.modelListPage(contactService.getAll(), pageable);
     }

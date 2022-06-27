@@ -3,6 +3,7 @@ package com.acme.mylawyerbe.security.api;
 import com.acme.mylawyerbe.security.domain.service.RoleService;
 import com.acme.mylawyerbe.security.mapping.RoleMapper;
 import com.acme.mylawyerbe.security.resource.RoleResource;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,7 @@ public class RolesController {
 
     @GetMapping
     @PreAuthorize("hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')")
+    @Operation(summary = "Get all roles")
     public ResponseEntity<?> getAllRoles(Pageable pageable) {
         Page<RoleResource> resources = mapper.modelListToPage(roleService.getAll(), pageable);
         return ResponseEntity.ok(resources);
