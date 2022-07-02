@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class ResourceValidationException extends RuntimeException{
 
-    public ResourceValidationException(){ super(); }
+    public ResourceValidationException(){
+    }
 
     public ResourceValidationException(String  message){
         super(message);
